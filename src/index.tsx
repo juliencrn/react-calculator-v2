@@ -5,6 +5,7 @@ import * as serviceWorker from './serviceWorker'
 import baseTheme from './theme'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import FreeCodeCamp from './Freecodecamp'
 
 const theme = createMuiTheme(baseTheme)
 
@@ -12,6 +13,7 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <>
       <CssBaseline />
+      <FreeCodeCamp />
       <Calculator />
     </>
   </ThemeProvider>,

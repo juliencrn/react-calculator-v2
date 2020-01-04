@@ -15,19 +15,21 @@ const useStyles = makeStyles(() => ({
 }))
 
 type Props = {
+  id: string
   text: string
   double?: boolean
   style: any
   onClick: any
 }
 
-export default function Touch({ text, double = false, style, onClick }: Props) {
+export default function Touch({ id, text, double, style, onClick }: Props) {
   const classes = useStyles({})
   const conditionalCSS = double
     ? { width: (touch.size + touch.margin) * 2 }
     : {}
   return (
     <Fab
+      id={id}
       className={classes.button}
       style={{ ...style, ...conditionalCSS }}
       variant={double ? 'extended' : 'round'}
@@ -37,4 +39,8 @@ export default function Touch({ text, double = false, style, onClick }: Props) {
       {text}
     </Fab>
   )
+}
+
+Touch.defaultProps = {
+  double: false
 }

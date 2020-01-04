@@ -2,6 +2,10 @@ import { useReducer } from 'react'
 
 import { execCalc, operators } from '../utils'
 
+// todo : +/-
+// todo : %
+// todo : Quand on click sur diff operateur a la suite
+
 export default function useCalculator() {
   const initialState = {
     current: 0,
@@ -44,6 +48,25 @@ export default function useCalculator() {
             activeOperator: action === '=' ? null : action,
             lastClicked: action,
             isFloat: false
+          }
+        }
+
+      case '+/-':
+        if (
+          operators.includes(lastClicked) ||
+          lastClicked === '=' ||
+          current == '0'
+        ) {
+          return {
+            ...state,
+            lastClicked: action,
+            current: '-'
+          }
+        } else {
+          return {
+            ...state,
+            lastClicked: action,
+            current: -current
           }
         }
 

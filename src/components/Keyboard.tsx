@@ -10,17 +10,21 @@ const {
   grey
 } = theme.palette
 
-type TouchType = {
+export type TouchType = {
   id: string
   text: string
   style: any
-  double?: boolean
+  large?: boolean
 }
 
 const TouchList: Array<TouchType> = [
   { id: 'clear', text: 'AC', style: { color: black, background: grey[400] } },
-  { id: '', text: '+/-', style: { color: black, background: grey[400] } },
-  { id: '', text: '%', style: { color: black, background: grey[400] } },
+  {
+    id: 'negative',
+    text: '+/-',
+    style: { color: black, background: grey[400] }
+  },
+  { id: 'percent', text: '%', style: { color: black, background: grey[400] } },
   {
     id: 'divide',
     text: '÷',
@@ -50,7 +54,7 @@ const TouchList: Array<TouchType> = [
     id: 'zero',
     text: '0',
     style: { color: white, background: grey[700] },
-    double: true
+    large: true
   },
   { id: 'decimal', text: '.', style: { color: white, background: grey[700] } },
   { id: 'equals', text: '=', style: { color: white, background: primary.main } }
@@ -62,13 +66,19 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-export default function Keyboard({ handleClick }: { handleClick: any }) {
+type Props = {
+  handleClick: any
+  activeSymbol?: string
+}
+
+export default function Keyboard({ handleClick, activeSymbol }: Props) {
   const classes = useStyles({})
   return (
     <div className={classes.grid}>
       {TouchList.map(touch => (
         <Touch
           key={touch.text}
+          active={touch.text === activeSymbol}
           onClick={() => handleClick(touch.text)}
           {...touch}
         />

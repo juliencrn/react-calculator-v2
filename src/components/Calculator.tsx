@@ -1,21 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 
 import theme from '../theme'
-import bg from '../assets/math-bg.jpeg'
 import Keyboard from './Keyboard'
 import Display from './Display'
+import useCalculator from '../hooks/useCalculator'
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
     display: 'flex',
     width: '100vw',
     height: '100vh',
-    backgroundImage: `url(${bg})`,
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
     position: 'absolute',
     top: 0,
     left: 0
@@ -29,18 +25,17 @@ const useStyles = makeStyles(({ spacing }) => ({
 
 const Calculator: React.FC = () => {
   const classes = useStyles({})
-  const [display, setDisplay] = useState('0')
-
-  function handleClick(symbol: string): void {
-    console.log({ symbol })
-    setDisplay(symbol)
-  }
+  const [state, dispatch] = useCalculator()
+  console.log({ state })
 
   return (
     <div className={classes.root}>
       <Paper elevation={4} className={classes.paper}>
-        <Display display={display} />
-        <Keyboard handleClick={(symbol: string) => handleClick(symbol)} />
+        <Display display={state.current.toString()} />
+        <Keyboard
+          handleClick={(symbol: string) => dispatch(symbol)}
+          activeSymbol={state.activeOperator}
+        />
       </Paper>
     </div>
   )

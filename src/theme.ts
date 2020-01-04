@@ -18,7 +18,7 @@ export default {
 
     background: {
       paper: '#000',
-      default: '#000'
+      default: 'rgba(0, 0, 0, .85)'
     }
   },
   touch: {

@@ -17,23 +17,35 @@ const useStyles = makeStyles(() => ({
 type Props = {
   id: string
   text: string
-  double?: boolean
+  large?: boolean
   style: any
   onClick: any
+  active: boolean
 }
 
-export default function Touch({ id, text, double, style, onClick }: Props) {
+function Touch({ id, text, large, style, onClick, active }: Props) {
   const classes = useStyles({})
-  const conditionalCSS = double
-    ? { width: (touch.size + touch.margin) * 2 }
+  const largeCSS = large ? { width: (touch.size + touch.margin) * 2 } : {}
+  const activeCSS = active
+    ? {
+        color: style.background,
+        background: style.color
+      }
     : {}
+
+  const css: React.CSSProperties = {
+    ...style,
+    ...largeCSS,
+    ...activeCSS
+  }
+
   return (
     <Fab
       id={id}
       className={classes.button}
-      style={{ ...style, ...conditionalCSS }}
-      variant={double ? 'extended' : 'round'}
-      size={double ? 'large' : 'medium'}
+      style={css}
+      variant={large ? 'extended' : 'round'}
+      size={large ? 'large' : 'medium'}
       onClick={onClick}
     >
       {text}
@@ -42,5 +54,7 @@ export default function Touch({ id, text, double, style, onClick }: Props) {
 }
 
 Touch.defaultProps = {
-  double: false
+  large: false
 }
+
+export default Touch

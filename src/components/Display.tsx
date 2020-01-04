@@ -10,7 +10,7 @@ const useStyles = makeStyles(({ spacing, palette }) => ({
   }
 }))
 
-export default function Display({ display }: { display: string }) {
+const Display: React.SFC<{ display: string }> = ({ display }) => {
   const classes = useStyles({})
   return (
     <Typography
@@ -23,3 +23,5 @@ export default function Display({ display }: { display: string }) {
     </Typography>
   )
 }
+
+export default Display

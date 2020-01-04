@@ -5,7 +5,7 @@ import * as serviceWorker from './serviceWorker'
 import baseTheme from './theme'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import FreeCodeCamp from './Freecodecamp'
+import FreeCodeCamp from './components/Freecodecamp'
 
 const theme = createMuiTheme(baseTheme)
 

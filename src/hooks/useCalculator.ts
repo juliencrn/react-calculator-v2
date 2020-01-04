@@ -20,23 +20,24 @@ export default function useCalculator() {
       case '-':
       case 'x':
       case '÷':
-        return {
-          ...state,
-          prev: current,
-          activeOperator: action,
-          lastClicked: action
-        }
-
       case '=':
         if (activeOperator) {
+          // calc
           return {
             ...state,
             current: execCalc(prev, current, activeOperator),
-            activeOperator: null,
+            prev: execCalc(prev, current, activeOperator),
+            activeOperator: action === '=' ? null : action,
+            lastClicked: action
+          }
+        } else {
+          return {
+            ...state,
+            prev: current,
+            activeOperator: action === '=' ? null : action,
             lastClicked: action
           }
         }
-        return state
 
       default:
         if (operators.includes(lastClicked)) {
@@ -56,6 +57,8 @@ export default function useCalculator() {
         }
     }
   }, initialState)
+
+  console.log(states)
 
   return [states, dispatch]
 }

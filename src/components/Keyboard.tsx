@@ -1,5 +1,4 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 
 import Touch from './Touch'
 import theme from '../theme'
@@ -60,29 +59,22 @@ const TouchList: Array<TouchType> = [
   { id: 'equals', text: '=', style: { color: white, background: primary.main } }
 ]
 
-const useStyles = makeStyles(() => ({
-  grid: {
-    width: (theme.touch.size + theme.touch.margin * 2) * 4
-  }
-}))
-
 type Props = {
   handleClick: any
   activeSymbol?: string
 }
 
-export default function Keyboard({ handleClick, activeSymbol }: Props) {
-  const classes = useStyles({})
-  return (
-    <div className={classes.grid}>
-      {TouchList.map(touch => (
-        <Touch
-          key={touch.text}
-          active={touch.text === activeSymbol}
-          onClick={() => handleClick(touch.text)}
-          {...touch}
-        />
-      ))}
-    </div>
-  )
-}
+const Keyboard: React.SFC<Props> = ({ handleClick, activeSymbol }) => (
+  <div>
+    {TouchList.map(touch => (
+      <Touch
+        key={touch.text}
+        active={touch.text === activeSymbol}
+        onClick={() => handleClick(touch.text)}
+        {...touch}
+      />
+    ))}
+  </div>
+)
+
+export default Keyboard

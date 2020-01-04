@@ -1,18 +1,9 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import Fab from '@material-ui/core/Fab'
 
 import theme from '../theme'
 
 const { touch } = theme
-
-const useStyles = makeStyles(() => ({
-  button: {
-    margin: touch.margin,
-    width: touch.size,
-    height: touch.size
-  }
-}))
 
 type Props = {
   id: string
@@ -23,8 +14,14 @@ type Props = {
   active: boolean
 }
 
-function Touch({ id, text, large, style, onClick, active }: Props) {
-  const classes = useStyles({})
+const Touch: React.SFC<Props> = ({
+  id,
+  text,
+  large = false,
+  style,
+  onClick,
+  active
+}) => {
   const largeCSS = large ? { width: (touch.size + touch.margin) * 2 } : {}
   const activeCSS = active
     ? {
@@ -34,6 +31,9 @@ function Touch({ id, text, large, style, onClick, active }: Props) {
     : {}
 
   const css: React.CSSProperties = {
+    margin: touch.margin,
+    width: touch.size,
+    height: touch.size,
     ...style,
     ...largeCSS,
     ...activeCSS
@@ -42,7 +42,6 @@ function Touch({ id, text, large, style, onClick, active }: Props) {
   return (
     <Fab
       id={id}
-      className={classes.button}
       style={css}
       variant={large ? 'extended' : 'round'}
       size={large ? 'large' : 'medium'}
@@ -51,10 +50,6 @@ function Touch({ id, text, large, style, onClick, active }: Props) {
       {text}
     </Fab>
   )
-}
-
-Touch.defaultProps = {
-  large: false
 }
 
 export default Touch

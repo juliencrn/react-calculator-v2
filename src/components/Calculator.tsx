@@ -19,15 +19,16 @@ const useStyles = makeStyles(({ spacing }) => ({
   paper: {
     margin: 'auto',
     borderRadius: theme.touch.size / 2,
-    padding: spacing(1)
+    padding: spacing(1),
+    '& > *': {
+      width: (theme.touch.size + theme.touch.margin * 2) * 4
+    }
   }
 }))
 
 const Calculator: React.FC = () => {
   const classes = useStyles({})
   const [state, dispatch] = useCalculator()
-  console.log({ state })
-
   return (
     <div className={classes.root}>
       <Paper elevation={4} className={classes.paper}>

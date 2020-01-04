@@ -5,16 +5,24 @@ export const operators: Operators[] = ['+', '-', '÷', 'x']
 export function execCalc(a: number, b: number, operator: Operators) {
   const x = Number(a)
   const y = Number(b)
+  let result = 0
   switch (operator) {
     case '-':
-      return x - y
+      result = x - y
+      break
     case '÷':
-      return x / y
+      result = x / y
+      break
     case 'x':
-      return x * y
+      result = x * y
+      break
     case '+':
-      return x + y
+      result = x + y
+      break
     default:
-      return 0
+      result = 0
+      break
   }
+
+  return Math.round(10000 * result) / 10000
 }

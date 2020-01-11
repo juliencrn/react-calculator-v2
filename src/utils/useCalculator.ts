@@ -113,7 +113,10 @@ export function CalculatorReducer(
           return {
             ...state,
             lastClicked: action,
-            current: `${current}${action}`,
+            current:
+              isOperator(lastClicked) || current == 0
+                ? `0${action}`
+                : `${current}${action}`,
             isFloat: true
           }
         }
@@ -141,7 +144,7 @@ export function CalculatorReducer(
         return {
           ...state,
           lastClicked: action,
-          current: current == 0 ? action : `${current}${action}`
+          current: current == 0 && !isFloat ? action : `${current}${action}`
         }
       }
   }

@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 
 import theme from '../theme'
 import Keyboard from './Keyboard'
 import Display from './Display'
-import useCalculator from '../hooks/useCalculator'
+import { CalculatorReducer, States } from '../utils/useCalculator'
+import { TouchText } from '../utils/touchList'
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -26,15 +27,29 @@ const useStyles = makeStyles(({ spacing }) => ({
   }
 }))
 
+const initialState: States = {
+  current: 0,
+  prev: 0,
+  activeOperator: null,
+  lastClicked: null,
+  isFloat: false
+}
+
 const Calculator: React.FC = () => {
   const classes = useStyles({})
-  const [state, dispatch] = useCalculator()
+  const [state, dispatch] = useReducer(
+    (state: States, action: TouchText) =>
+      CalculatorReducer(state, action, initialState),
+    initialState
+  )
+  console.log(state)
+
   return (
     <div className={classes.root}>
       <Paper elevation={4} className={classes.paper}>
         <Display display={state.current.toString()} />
         <Keyboard
-          handleClick={(symbol: string) => dispatch(symbol)}
+          handleClick={(symbol: TouchText) => dispatch(symbol)}
           activeSymbol={state.activeOperator}
         />
       </Paper>

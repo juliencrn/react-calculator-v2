@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Touch from './Touch'
-import touchList from '../touchList'
+import touchList from '../utils/touchList'
 
 type Props = {
   handleClick: any

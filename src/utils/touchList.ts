@@ -1,4 +1,4 @@
-import theme from './theme'
+import theme from '../theme'
 
 const {
   common: { black, white },
@@ -6,9 +6,24 @@ const {
   grey
 } = theme.palette
 
+export type Operators = '+' | '-' | 'x' | '÷'
+export type TouchNumber =
+  | '1'
+  | '2'
+  | '3'
+  | '4'
+  | '5'
+  | '6'
+  | '7'
+  | '8'
+  | '9'
+  | '0'
+export type OthersChars = '=' | '.' | 'AC' | '+/-' | '%'
+export type TouchText = Operators | TouchNumber | OthersChars
+
 export type TouchType = {
   id: string
-  text: string
+  text: TouchText
   style: any
   large?: boolean
 }
